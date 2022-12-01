@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/sample.css">
+    <title>ペンギン名前当てゲーム</title>
+</head>
+
+<body>
+    <header>
+        <h1>ペンギン名前当てゲーム</h1>
+    </header>
+    <main>
+        <!-- オーディオ -->
+        <audio src="bgm/card.mp3" id="play-button_1"></audio>
+        <audio src="bgm/nyu.mp3" id="play-button_2"></audio>
+        <audio src="bgm/yochi.mp3" id="play-button_3"></audio>
+        <audio src="bgm/satousan.mp3" id="play-button_4"></audio>
+
+        <div class="flex">
+            <div>
+                <!-- クリックボタンがある、カードがある -->
+                <button id="click" class="touch">クリック</button>
+                <!-- 結果が出る カードと名前が出る -->
+                <div id="result" class="penname">今日のすみだペンは？</div>
+                </p>
+                <p id="img" class="img">
+                    <img src="img/card.jpeg" alt="?" style="width:400px; height: 400px;">
+                </p>
+            </div>
+
+            <div>
+                <form>
+                    <fieldset>
+                        <legend>チャット入力画面</legend>
+
+                        <div>
+                            名前を入力する <input type="text" id="text"><button type="button" id="send">send</button>
+                        </div>
+
+                    </fieldset>
+                </form>
+                <!-- データ出力場所 -->
+                <ul id="output"></ul>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $('#click').on('click', function () {
+                const card = Math.floor(Math.random() * 8);
+                console.log(card);
+                if (card === 0) {
+                    $('#result').text('');
+                    $('#img').html('<a href="https://twitter.com/ReLU_aqua/status/1570725630177849346?s=20&t=mFvMq9wMiMXuLovlkfxxSQ"><img src="img/pen_sira_1.png" alt="しらたま１" style="width:400px; height:500px;"></a> ');
+                    $("#play-button_2").get(0).play();
+
+                } else if (card === 1) {
+                    $('#result').text('');
+                    $('#img').html('<a href="https://twitter.com/haru3131sui/status/1559133814420451328?s=20&t=mFvMq9wMiMXuLovlkfxxSQ"><img src="img/pen_sira_2.png" alt="しらたま2" style="width:400px; height:500px;"></a> ');
+                    $("#play-button_3").get(0).play();
+
+
+                } else if (card === 2) {
+                    $('#result').text('');
+                    $('#img').html('<a href="https://twitter.com/kaze_iv/status/1411811612877463553?s=20&t=mFvMq9wMiMXuLovlkfxxSQ"><img src="img/pen_bon_1.png" alt="ぼんぼり1" style="width:400px; height:500px;"></a> ');
+                    $("#play-button_2").get(0).play();
+
+
+                } else if (card === 3) {
+                    $('#result').text('');
+                    $('#img').html('<a href="https://twitter.com/ReLU_aqua/status/1516199679876161541?s=20&t=mFvMq9wMiMXuLovlkfxxSQ"><img src="img/pen_bon_2.png" alt="ぼんぼり2" style="width:400px; height:500px;"></a> ');
+                    $("#play-button_3").get(0).play();
+
+
+                } else if (card === 4) {
+                    $('#result').text('');
+                    $('#img').html('<a href="https://twitter.com/Sumida_Aquarium/status/1539422538845286400?s=20&t=mFvMq9wMiMXuLovlkfxxSQ"><img src="img/pen_dai.png" alt="だいふく" style="width:400px; height:500px;"></a> ');
+                    $("#play-button_2").get(0).play();
+
+
+                } else if (card === 5) {
+                    $('#result').text('');
+                    $('#img').html('<a href="https://twitter.com/kaze_fuu4/status/1581603426340810752?s=20&t=mFvMq9wMiMXuLovlkfxxSQ"><img src="img/pen_koma.png" alt="こまり" style="width:400px; height:500px;"></a> ');
+                    $("#play-button_2").get(0).play();
+
+
+                } else if (card === 6) {
+                    $('#result').text('');
+                    $('#img').html('<a href="https://twitter.com/Sumida_Aquarium/status/979651585113432065?s=20&t=mFvMq9wMiMXuLovlkfxxSQ"><img src="img/pen_saku.png" alt="さくら" style="width:400px; height:500px;"></a> ');
+                    $("#play-button_2").get(0).play();
+
+                } else {
+                    $('#result').text('');
+                    $('#img').html('<a href="https://www.walkerplus.com/trend/matome/article/1079040/"><img src="img/satousan.png" alt="佐藤さん" style="width:400px; height:500px;"></a> ');
+                    $("#play-button_4").get(0).play();
+
+                }
+            });
+        </script>
+        <script>
+
+            // 日時をいい感じの形式にする関数
+            function convertTimestampToDatetime(timestamp) {
+                const _d = timestamp ? new Date(timestamp * 1000) : new Date();
+                const Y = _d.getFullYear();
+                const m = (_d.getMonth() + 1).toString().padStart(2, '0');
+                const d = _d.getDate().toString().padStart(2, '0');
+                const H = _d.getHours().toString().padStart(2, '0');
+                const i = _d.getMinutes().toString().padStart(2, '0');
+                const s = _d.getSeconds().toString().padStart(2, '0');
+                return `${Y}/${m}/${d} ${H}:${i}:${s}`;
+            }
+        </script>
+
+        <script type="module">
+
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+            import {
+                getFirestore,
+                collection,
+                addDoc,
+                serverTimestamp,
+                onSnapshot,
+                query,
+                orderBy,
+            } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyCyqz-K0tguI2evSqZ_SmYliIGkZ5Wc2Bk",
+                authDomain: "penguin-ogiri.firebaseapp.com",
+                projectId: "penguin-ogiri",
+                storageBucket: "penguin-ogiri.appspot.com",
+                messagingSenderId: "543389516326",
+                appId: "1:543389516326:web:879fb20796906450c05ce7"
+            };
+
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+
+            $('#send').on('click', function () {
+                const postData = {
+                    text: $('#text').val(),
+                    time: serverTimestamp(), //Firestore 側で用意されている関数を使用する
+                };
+                //データを送信する処理
+                addDoc(collection(db, "chat"), postData); //addDoc=コレクションリファレンスを利用する関数
+                $("#text").val(""); //入力値を取得する
+            });
+            //7-6ここまで
+            //7-7ここから
+            // データ取得処理
+            // onSnapshot(collection(db, "chat"), (querySnapshot) => {
+            //     console.log(querySnapshot.docs);
+
+            //データ取得条件の指定（今回は時間の新しい順に並び替えて取得）
+            const q = query(collection(db, "chat"), orderBy("time", "desc")); //desc=降順
+            onSnapshot(q, (querySnapshot) => {
+                const documents = [];
+                //データの取り出し
+                //繰り返しIDとかデータをとってきていますよの処理
+                querySnapshot.docs.forEach(function (doc) {
+                    const document = {
+                        id: doc.id,
+                        data: doc.data(),
+                    };
+
+                    documents.push(document);
+                });
+
+                console.log(documents);
+                //画面表示するためのタグ生成
+                const htmlElements = [];
+                documents.forEach(function (document) {
+                    htmlElements.push(`
+                        <li id="${document.id}">
+                        <p>${document.data.text} at ${convertTimestampToDatetime(document.data.time.seconds)}</p>
+                        </li>
+                    `);
+                });
+
+                $("#output").html(htmlElements);
+            });
+
+
+
+//7-7ここまで
+
+        </script>
+
+    </main>
+</body>
+
+</html>

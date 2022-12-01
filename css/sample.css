@@ -1,0 +1,37 @@
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    text-align: center;
+    font-family: "Tsukushi A Round Gothic", "筑紫A丸ゴシック";
+    color: #18474D;
+    background-color: #B0E0E6;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: bold;
+    position: relative;
+    color: #333333;
+    /*文字の色*/
+    background: whitesmoke;
+    /*背景色*/
+    padding: 8px 0 4px 10px;
+    /*文字周りの余白*/
+}
+
+.touch {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+img {
+    border-radius: 30px;
+
+}
+
+.penname {
+    font-size: 30px;
+}
